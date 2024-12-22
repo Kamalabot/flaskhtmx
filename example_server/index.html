@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>HTMX Demo</title>
+    <script src="https://unpkg.com/htmx.org@1.9.10"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .search-box {
+            margin-bottom: 20px;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 6px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+
+        input[type="text"]:focus {
+            outline: none;
+            border-color: #3498db;
+        }
+
+        button {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #2980b9;
+        }
+
+        .search-results {
+            margin-top: 20px;
+        }
+
+        .search-results ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .search-results li {
+            padding: 10px;
+            border-bottom: 1px solid #eee;
+            transition: background-color 0.2s;
+        }
+
+        .search-results li:hover {
+            background-color: #f8f9fa;
+        }
+
+        #time-container {
+            margin-top: 20px;
+            text-align: center;
+            font-size: 18px;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>HTMX Search Demo</h1>
+        
+        <div class="search-box">
+            <input type="text" 
+                   name="search" 
+                   placeholder="Search items..."
+                   hx-get="/search"
+                   hx-trigger="keyup changed delay:300ms"
+                   hx-target="#search-results">
+        </div>
+
+        <div id="search-results" class="search-results">
+            Type to search...
+        </div>
+
+        <div style="text-align: center; margin-top: 30px;">
+            <button hx-get="/get-time"
+                    hx-target="#time-container"
+                    hx-swap="innerHTML">
+                Get Current Time
+            </button>
+            <div id="time-container"></div>
+        </div>
+    </div>
+</body>
+</html>
